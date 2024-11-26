@@ -1,24 +1,32 @@
-import logo from './logo.svg';
 import './App.css';
-
+import { useEffect } from 'react';
 function App() {
+  const handleCallBack = (res) =>{
+console.log("Encoded token:" +res.credential)
+  }
+
+  useEffect(()=>{
+    /* global google */
+    google.accounts.id.initialize({
+      client_id:"1014479172456-qmqkp28bci38tdr9hmqtv06dupd3josc.apps.googleusercontent.com",
+      callback: handleCallBack
+    })
+    google.accounts.id.renderButton(
+      document.getElementById("SignIn"),
+      {theme:"outline", size:"large"}
+    )
+  },[])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <>
+    <div>
+    <h1 className="text-3xl mt-5 py-2 text-center">08- Learn With Podcasts
+      
+      </h1>
+      <div id="SignIn"></div>
     </div>
+   
+      </>
+    
   );
 }
 
