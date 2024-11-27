@@ -1,8 +1,12 @@
 import './App.css';
-import { useEffect } from 'react';
+import { useState,useEffect } from 'react';
+import { jwtDecode } from 'jwt-decode';
 function App() {
+  const[user, setUser] = useState({})
   const handleCallBack = (res) =>{
-console.log("Encoded token:" +res.credential)
+    let user = jwtDecode(res.credential);
+    setUser(user);
+// console.log("Encoded token:" +res.credential)
   }
 
   useEffect(()=>{
@@ -23,6 +27,11 @@ console.log("Encoded token:" +res.credential)
       
       </h1>
       <div id="SignIn"></div>
+      {user &&
+      <>
+      <img alt="User" src={user.picture} />
+      <h3>{user.name}</h3>
+      </> }
     </div>
    
       </>
